@@ -6,7 +6,7 @@
 #include <sys/stat.h>
 
 HANDLE g_HProc = NULL;
-wchar_t g_ServerAddress[127] = L"http://127.0.0.1:12345/upload";
+wchar_t g_ServerAddress[127] = L"https://upload.prntscr.com/upload";
 
 /*
 trecv t_recv = NULL;
@@ -185,11 +185,11 @@ void Main()
 		int len = fread(address, sizeof(char), sizeof(address), f);
 		fclose(f);
 		address[strcspn(address, "\r\n")] = '\0';
+		ZeroMemory(g_ServerAddress, sizeof(g_ServerAddress));
 		mbstowcs(g_ServerAddress, address, len);
 	}
 	else
 	{
-		printf(path.c_str());
 		FILE* f = fopen(path.c_str(), "w");
 		fwrite(address, sizeof(char), strlen(address), f);
 		fclose(f);
